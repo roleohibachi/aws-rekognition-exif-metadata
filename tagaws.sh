@@ -2,7 +2,8 @@
 
 #usage: ./tagaws.sh image.jpg
 #for scripting: find . -iname "*.jpg" -not -path "*/@eaDir/*" | parallel --timeout 60 -u -j 10 ~/tagaws.sh '{}'
-#requires imagemagick, exiv2, and aws cli
+#apt install imagemagick exiv2 jq 
+#install and configure aws cli manually https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 
 prefix="aws"
 

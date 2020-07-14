@@ -2,13 +2,13 @@
 This is glue code to retrieve AWS Rekognition object tags, and write them to jpeg metadata (exif, iptc, xmp) as tags. This is cross-compatible and tested with Digikam and Synology Photo Station, but should be pretty much universal.
 
 ## prereqs
-You'll need to install imagemagick (to convert large images down to smaller sizes for processing), exiv2 (for interacting with metadata), aws cli (for talking to aws), and (optional/recommended) GNU parallel. 
+You'll need to install imagemagick (to convert large images down to smaller sizes for processing), exiv2 (for interacting with metadata), aws cli (for talking to aws), jq (for parsing the json result) and (optional/recommended) GNU parallel for doing multiple requests at once. 
 
 GNU parallel is a wonderful tool. Here's a citation for where it comes from:
   O. Tange (2011): GNU Parallel - The Command-Line Power Tool,
   ;login: The USENIX Magazine, February 2011:42-47.
 
-You'll also need to configure AWS. This is done by creating an account on the website, adding the rekognition api to your stuff on that dashboard, and configuring a key to use for the command line client ('aws configure' to be prompted for it).
+You'll also need to configure AWS. This is done by creating an account on the website, adding the rekognition api to your stuff on that dashboard, and configuring a key to use for the command line client ('aws configure' to be prompted for it). It's really cheap at the volume I'm working at. "The Free Tier lasts 12 months and allows you analyze 5,000 images per month... After that, the first 1 million images processed per month are $0.001 per image." 
 
 Images larger than 5MiB will be resized in /tmp before being uploaded, then deleted. If you're running this from a spinning-disk hard drive, it will serve you well to make sure /tmp is mounted as a tmpfs first; or otherwise trick mktemp into storing stuff in RAM.
 
